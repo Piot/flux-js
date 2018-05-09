@@ -1,6 +1,6 @@
 {
-  "name": "flux-js",
-  "version": "1.0.0",
+  "name": "js-flux",
+  "version": "1.0.8",
   "description": "Datagram send and receive over binary websocket",
   "main": "src/connection.js",
   "repository": "https://github.com/Piot/flux-js",
