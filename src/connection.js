@@ -44,7 +44,7 @@ export class WebsocketConnection {
   }
 
   _onMessage(event) {
-    this.log.log('flux: message');
+    // this.log.log('flux: received message');
     return this.events.trigger('message', event.data);
   }
 
