@@ -1,15 +1,19 @@
 {
   "name": "js-flux",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Datagram send and receive over binary websocket",
   "main": "dist/index.js",
   "repository": "https://github.com/Piot/flux-js",
   "author": "Peter Bjorklund",
   "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
     "rollup": "^0.63.4",
     "uglify-es": "^3.3.9"
   },
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build:dev": "rollup src/index.js --file dist/index.js --format es",
     "build:prod": "rollup src/index.js --file dist/index.js --format es && uglifyjs dist/index.js --output dist/index.js --beautify beautify=false,quote_style=3"
