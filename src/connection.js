@@ -1,22 +1,13 @@
-import {
-  Event
-} from './event.js'
-
 export class WebsocketConnection {
 
   constructor(host, log) {
     this.host = host;
     this.log = log;
-    this.events = new Event();
+    this.onOpen = () => {};
+    this.onClose = () => {};
+    this.onError = (e) => {};
+    this.onMessage = (m) => {};
     this.readyState = 0;
-  }
-
-  on(eventName, cb) {
-    this.events.on(eventName, cb);
-  }
-
-  off(eventName, cb) {
-    this.events.off(eventName, cb);
   }
 
   connect() {
@@ -45,25 +36,26 @@ export class WebsocketConnection {
 
   _onMessage(event) {
     // this.log.log('flux: received message');
-    return this.events.trigger('message', event.data);
+    this.onMessage(event.data);
   }
 
   _onOpen(event) {
     this.log.log('flux: opened');
     this.readyState = 1;
-    return this.events.trigger('open', this);
+    this.onOpen();
+    this.log.log('flux: after opened');
   }
 
   _onClose(event) {
     this.log.log('flux: closed');
     this.readyState = 2;
-    return this.events.trigger('close', this);
+    this.onClose();
   }
 
   _onError(error) {
     if (this.log != null) {
       this.log.log('flux: we have a error:', error);
     }
-    return this.events.trigger('error', this);
+    this.onError(error);
   }
 };

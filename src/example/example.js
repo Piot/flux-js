@@ -1,6 +1,6 @@
 import {
   WebsocketConnection
-} from './connection.js'
+} from './node_modules/js-flux/dist/index.js'
 
 class Log {
   log(x) {
@@ -13,11 +13,10 @@ class Example {
   constructor() {
     console.log('example: started...');
     const log = new Log();
-    // const host = 'ws://127.0.0.1:32001';
     const host = 'ws://demos.kaazing.com/echo';
     this.socket = new WebsocketConnection(host, log);
-    this.socket.on('open', () => this.onOpen());
-    this.socket.on('message', (a) => this.onMessage(a));
+    this.socket.onOpen = () => this.onOpen();
+    this.socket.onMessage = (msg) => this.onMessage(msg);
     this.socket.connect();
   }
 
