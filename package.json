@@ -18,6 +18,8 @@
   "scripts": {
     "build:dev": "rollup src/index.js --file dist/index.js --format es",
     "build:prod": "rollup src/index.js --file dist/index.js --format es && uglifyjs dist/index.js --output dist/index.js --config-file=config/uglify.config.json",
-    "doc": "documentation build src/index.js -f md -o readme.md"
+    "doc": "documentation build src/index.js -f md -o readme.md",
+    "test": "yarn build:prod",
+    "deploy": "yarn build:prod && yarn doc && yarn publish"
   }
 }
