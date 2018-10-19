@@ -1,16 +1,16 @@
 /**
  * Encapsulates a websocket connection
- * 
+ *
  * Wraps a Websocket connection with a logger.
  * @example
  * import { WebsocketConnection } from 'js-flux';
- * 
+ *
  * class Log {
  *   log(x) {
  *    console.log('log: ' + x);
  *  }
  * }
- * 
+ *
  * let logger = new Log();
  * let connection = new WebsocketConnection('ws://demos.kaazing.com/echo', logger);
  *
@@ -23,7 +23,6 @@
  * @param {Log} log  An object which has a `log()` function
  */
 export class WebsocketConnection {
-
   constructor(host, log) {
     this.host = host;
     this.log = log;
@@ -32,9 +31,9 @@ export class WebsocketConnection {
     /** @member {Callback} */
     this.onClose = () => {};
     /** @member {Callback} */
-    this.onError = (e) => {};
+    this.onError = e => {};
     /** @member {Callback} */
-    this.onMessage = (m) => {};
+    this.onMessage = m => {};
     this.readyState = 0;
   }
 
@@ -47,9 +46,9 @@ export class WebsocketConnection {
     connection.binaryType = 'arraybuffer';
     connection.onopen = () => this._onOpen();
     connection.onclose = () => this._onClose();
-    connection.onerror = (e) => this._onError(e);
-    connection.onmessage = (e) => this._onMessage(e);
-    return this.connection = connection;
+    connection.onerror = e => this._onError(e);
+    connection.onmessage = e => this._onMessage(e);
+    return (this.connection = connection);
   }
 
   /**
@@ -61,10 +60,11 @@ export class WebsocketConnection {
 
   /**
    * Sends a binary payload
-   * @param {Uint8Array|Blob} payload 
+   * @param {Uint8Array|Blob} payload
    */
   send(payload) {
-    const isCorrectType = (payload instanceof Uint8Array) || (payload instanceof Blob);
+    const isCorrectType =
+      payload instanceof Uint8Array || payload instanceof Blob;
     if (!isCorrectType) {
       console.error('Payload to send() must be Uint8Array or blob');
       return;
@@ -96,4 +96,4 @@ export class WebsocketConnection {
     }
     this.onError(error);
   }
-};
+}

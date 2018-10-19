@@ -1,4 +1,1 @@
-export {
-    WebsocketConnection
-}
-from './connection.js'
+export { WebsocketConnection } from './connection.js';
